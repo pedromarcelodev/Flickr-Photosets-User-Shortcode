@@ -66,7 +66,7 @@ function paginationFlickr($pages, $current_page = 1)
 
 	$link = getLinkPage(1, $permalink);
 
-	$content .= '<a href="' . $link . '" class="page-number">Primeira página</a>';
+	$content .= '<a href="' . $link . '" class="fpus-page-number">Primeira página</a>';
 
 	if ($current_page == 1)
 	{
@@ -85,11 +85,11 @@ function paginationFlickr($pages, $current_page = 1)
 	}
 
 	for ($i = $start; $i <= $end; $i++) { 
-		$class = 'page-number';
+		$class = 'fpus-page-number';
 
 		if ($i == $current_page)
 		{
-			$class = 'current-page ' . $class;
+			$class = 'fpus-current-page ' . $class;
 		}
 
 		$link = getLinkPage($i, $permalink);
@@ -98,7 +98,7 @@ function paginationFlickr($pages, $current_page = 1)
 
 	$link = getLinkPage($pages, $permalink);
 
-	$content .= '<a href="' . $link . '" class="page-number">Última página</a>';
+	$content .= '<a href="' . $link . '" class="fpus-page-number">Última página</a>';
 
 	$content .= '</div>';
 
@@ -110,6 +110,7 @@ include($plugin_dir . 'class.flickr.php');
 include($plugin_dir . 'photos.php');
 include($plugin_dir . 'photosets.php');
 include($plugin_dir . 'plugin-page.php');
+include($plugin_dir . 'register-scripts.php');
 
 function flickr_photosets_user_shortcode($atts)
 {

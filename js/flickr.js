@@ -1,10 +1,11 @@
-	
-	/*
-	|----------------------------
-	| Lightbox Flickr
-	|----------------------------
-	*/
 
+/*
+|----------------------------
+| Lightbox Flickr
+|----------------------------
+*/
+(function($)
+{
 	// Abertura do Lightbox
 	$(document).ready(function(){
 		$('.lightbox-flickr').on('click', function(){
@@ -36,7 +37,7 @@
 
 			buildElements(prev, next);
 
-			$('#light').html('<img id="photo-thumb" src="' + href + '">');
+			$('#fpus-light').html('<img id="photo-thumb" src="' + href + '">');
 
 			var imagePreLoader = new Image();
 
@@ -49,14 +50,14 @@
 
 			imagePreLoader.src = href;
 
-			$('#back-close').on('click', function(){
-				$('#window').fadeOut(300, function(){
+			$('#fpus-back-close').on('click', function(){
+				$('#fpus-window').fadeOut(300, function(){
 					$(this).remove();
 				});
 			});
 
-			$('#window').hide();
-			$('#window').fadeIn(300);
+			$('#fpus-window').hide();
+			$('#fpus-window').fadeIn(300);
 
 			buildEventNav();
 
@@ -64,23 +65,23 @@
 		});
 
 		$(window).resize(function(){
-			var width = $('#light').width();
-			var height = $('#light').height() + 45;
+			var width = $('#fpus-light').width();
+			var height = $('#fpus-light').height() + 45;
 			var margin_top = ($(window).height() - height) / 2;
 			modelar(width, height);
 		});
 
 		$(document).on('keyup', function(e){
 			if (e.keyCode == 27) {
-				$('#window').fadeOut(200, function(){
+				$('#fpus-window').fadeOut(200, function(){
 					$(this).remove();
 				});
 			}
 			else if (e.keyCode == 37) {
-				buildPrev('#prev-photo');
+				buildPrev('#fpus-prev-photo');
 			}
 			else if (e.keyCode == 39) {
-				buildNext('#next-photo');
+				buildNext('#fpus-next-photo');
 			}
 
 		});
@@ -89,7 +90,7 @@
 	//Remodela o tamanho do Lightbox quando muda a imagem
 	function remodelar(w, h, margin_top)
 	{
-		$('#back-lightbox').animate(
+		$('#fpus-back-lightbox').animate(
 			{
 				width : w,
 				height : h,
@@ -99,7 +100,7 @@
 			"easeInOutQuint"
 		);
 
-		$('#nav-photos').animate(
+		$('#fpus-nav-photos').animate(
 			{
 				marginLeft : (w - 220) / 2
 			},
@@ -113,13 +114,13 @@
 	{
 		var margin_top = ($(window).height() - (height + 45)) / 2;
 
-		$('#back-lightbox').css({
+		$('#fpus-back-lightbox').css({
 			'height' : height + 'px',
 			'width' : width + 'px',
 			'margin-top' : margin_top + 'px'
 		});
 
-		$('#nav-photos').css({
+		$('#fpus-nav-photos').css({
 			'margin-left' : (width - 220) / 2 + 'px'
 		});
 	}
@@ -128,53 +129,53 @@
 	function buildElements(prev, next)
 	{
 		$('<div>', {
-			id : 'window',
+			id : 'fpus-window',
 			appendTo : 'body'
 		});
 
 		$('<div>', {
-			id : 'back-close',
-			appendTo : '#window'
+			id : 'fpus-back-close',
+			appendTo : '#fpus-window'
 		});
 
 		$('<div>', {
-			id : 'back-lightbox',
-			appendTo : '#window'
+			id : 'fpus-back-lightbox',
+			appendTo : '#fpus-window'
 		});
 
 		$('<div>', {
-			id : 'light',
-			appendTo : '#back-lightbox'
+			id : 'fpus-light',
+			appendTo : '#fpus-back-lightbox'
 		});
 
 		$('<div>', {
-			id : 'nav-photos',
-			appendTo : '#back-lightbox'
+			id : 'fpus-nav-photos',
+			appendTo : '#fpus-back-lightbox'
 		});
 
 		$('<div>', {
-			id : 'prev-photo',
+			id : 'fpus-prev-photo',
 			text : 'Anterior «',
 			class : '#photo-flickr-' + prev,
-			appendTo : '#nav-photos'
+			appendTo : '#fpus-nav-photos'
 		});
 
 		$('<div>', {
-			id : 'next-photo',
+			id : 'fpus-next-photo',
 			text : '» Próximo',
 			class : '#photo-flickr-' + next,
-			appendTo : '#nav-photos'
+			appendTo : '#fpus-nav-photos'
 		});
 	}
 
 	// Cria os eventos de navegacao
 	function buildEventNav()
 	{
-		$('#prev-photo').on('click', function(){
-			buildPrev('#prev-photo');
+		$('#fpus-prev-photo').on('click', function(){
+			buildPrev('#fpus-prev-photo');
 		});
 
-		$('#next-photo').on('click', function(){
+		$('#fpus-next-photo').on('click', function(){
 			buildNext('#next-photo');
 		});
 	}
@@ -187,8 +188,8 @@
 		var idNumber = parseInt($(id).data('id'));
 		var next = 0;
 		var prev = 0;
-		var width = $('#light').width();
-		var height = $('#light').height();
+		var width = $('#fpus-light').width();
+		var height = $('#fpus-light').height();
 
 		var imagePreLoader = new Image();
 
@@ -222,8 +223,8 @@
 			prev = idNumber - 1;
 		}
 
-		$('#prev-photo').attr('class', '#photo-flickr-' + prev);
-		$('#next-photo').attr('class', '#photo-flickr-' + next);
+		$('#fpus-prev-photo').attr('class', '#photo-flickr-' + prev);
+		$('#fpus-next-photo').attr('class', '#photo-flickr-' + next);
 	}
 
 	// Cria o evento de navegacao para imagem posterior
@@ -234,8 +235,8 @@
 		var idNumber = parseInt($(id).data('id'));
 		var next = 0;
 		var prev = 0;
-		var width = $('#light').width();
-		var height = $('#light').height();
+		var width = $('#fpus-light').width();
+		var height = $('#fpus-light').height();
 
 		var imagePreLoader = new Image();
 
@@ -270,6 +271,7 @@
 			prev = idNumber - 1;
 		}
 
-		$('#prev-photo').attr('class', '#photo-flickr-' + prev);
-		$('#next-photo').attr('class', '#photo-flickr-' + next);
+		$('#fpus-prev-photo').attr('class', '#photo-flickr-' + prev);
+		$('#fpus-next-photo').attr('class', '#photo-flickr-' + next);
 	}
+})(jQuery);

@@ -23,18 +23,17 @@ function flickr_photos($atts)
 
 	$content = '';
 
-	$content .= '<link rel="stylesheet" type="text/css" href="' . $plugin_url . 'css/flickr.min.css">';
-	//$content .= '<script type="text/javascript" src="' . $plugin_url . 'js/jquery-2.0.3.min.js"></script>';
+	wp_enqueue_style('flickr-lightbox-css');
 
-	$content .= '<a class="back-albuns" href="' . get_permalink() . '">Voltar para álbuns</a>';
-	$content .= '<div class="photos">';
+	$content .= '<a class="fpus-back-albuns" href="' . get_permalink() . '">Voltar para álbuns</a>';
+	$content .= '<div class="flickr-photos">';
 
 	foreach ($photos['photoset'] as $photo) :
 		if ($i % 3 == 1) :
-			$content .= '<div class="row">';
+			$content .= '<div class="flickr-table-row">';
 		endif;
 
-		$content .= '<div class="cell">';
+		$content .= '<div class="flickr-table-cell">';
 		$content .= '	<div class="photo">';
 		$content .= '		<a href="' . $photo['thumbs']['z'] . '" id="photo-flickr-' . $i . '" data-id="' . $i . '" class="lightbox-flickr">';
 		$content .= '			<img src="' . $photo['thumbs']['m'] . '">';
@@ -59,8 +58,7 @@ function flickr_photos($atts)
 		$content .= paginationFlickr(intval($photos['pages']), intval($parameters['page']));
 	}
 	
-	$content .= '<script type="text/javascript" src="' . $plugin_url . 'js/flickr.min.js"></script>';
-	$content .= '<script type="text/javascript" src="' . $plugin_url . 'js/jquery-ui.min.js"></script>';
+	wp_enqueue_script('flickr-lightbox-js');
 
 	return $content;
 }

@@ -48,19 +48,19 @@ function flickr_photosets($atts)
 		$countPhotos = count($photosets['photosets']);
 
 		$content = '';
+		wp_enqueue_style('flickr-lightbox-css');
 
-		$content .= '<link rel="stylesheet" type="text/css" href="' .
-			$plugin_url . 'css/flickr.min.css">';
+		
 
-		$content .= '<div class="photos">';
+		$content .= '<div class="flickr-photos">';
 
 		foreach ($photosets['photosets'] as $photoset) :
 
 			if ($i % 3 == 1) :
-				$content .= '<div class="row">';
+				$content .= '<div class="flickr-table-row">';
 			endif;
 
-			$content .= '<div class="cell">';
+			$content .= '<div class="flickr-table-cell">';
 			$content .= '	<div class="photo">';
 			$content .= "		<a href=\"{$link}{$q}photoset={$photoset['id']}\">";
 			$content .= "			<img src=\"{$photoset['photoset_cover']}\">";
