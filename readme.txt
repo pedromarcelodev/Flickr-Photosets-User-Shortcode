@@ -34,7 +34,7 @@ Claro que pode, basta mandar um e-mail para pedromarcelodesaalves@gmail.com com 
 == Changelog ==
 
 = 1.3.3 =
-* Corrigindo bug na navegação das photos
+* Corrigindo bug na navegação das fotos
 
 = 1.3.1 =
 * Correção de bugs na paginação
